@@ -1,14 +1,10 @@
-html = """<html>
-   <body>
-      <form action = "http://localhost:5000/pushdata" method = "post">
-         <p>Enter Name:</p>
-         <p><input type = "text" name = "item" /></p>
-         <p><input type = "text" name = "quantity" /></p>
-         <p><input type = "text" name = "package" /></p>
-         <p><input type = "submit" value = "отправить" /></p>
-      </form>   
-   </body>
-</html>"""
+from flask import Flask, render_template
+
+
+app = Flask(__name__)
+@app.route('/')
+def main():
+    return render_template('main.html')
 
 
 class MyDB:
@@ -33,7 +29,7 @@ class MyDB:
 
 class Comedy:
     def __init__(self, comedy_name: str):
-        # я храню базу данных внутри нашего магазина
+        # я храню базу данных
         self.comedy = MyDB(comedy_name)
 
     def push_new_buy(self, filme, URL):
@@ -67,7 +63,6 @@ app = Flask(__name__)
 @app.route('/')
 def pokupki():
     return "<h1>Список жанров:</h1>" + "<a href=\"http://localhost:5000/com\">Комедия</a> <br>" + "<a href=\"http://localhost:5001/com\">Мелодрама</a> <br>" + "<a href=\"http://localhost:5002/com\">Ужасы</a> <br>" + "<a href=\"http://localhost:5003/com\">Детективы</a> <br>" + "<a href=\"http://localhost:5004/com\">Боевики</a> <br>" + "<a href=\"http://localhost:5005/com\">Триллеры</a> <br>" + "<a href=\"http://localhost:5006/com\">Фантастика</a> <br>"
-
 
 @app.route('/com')
 def get_com():
